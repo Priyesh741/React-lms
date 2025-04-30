@@ -1,15 +1,25 @@
-import React from 'react'
-import './index.css'
-import Home from './component/Home'
-import Booking from './component/Booking';
-const App = () => {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ManageBooks from "./component/ManageBooks";
+import Booking from "./component/Booking";
+import Member from "./component/Member"; // your Members component
+import Sidebar from "./component/Sidebar"; // Your sidebar layout
+
+function App() {
   return (
-    <>
-    
-    <Home/>
-    <Booking/>
-    </>
-  )
+    <Router>
+      <div className="flex min-h-screen">
+        <Sidebar /> {/* Sidebar will always be shown */}
+        <div className="flex-1 p-2">
+          <Routes>
+            <Route path="/manage-books" element={<ManageBooks />} />
+            <Route path="/booking" element={<Booking />} />
+            <Route path="/members" element={<Member />} />
+            <Route path="/sidebar" element={<Sidebar />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;

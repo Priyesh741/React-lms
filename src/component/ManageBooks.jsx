@@ -1,15 +1,11 @@
 import { useState } from "react";
 import {
   FaSearch,
-  FaBook,
-  FaUser,
-  FaCog,
-  FaBell,
-  FaBookmark,
   FaPlus,
 } from "react-icons/fa";
 
 const ManageBooksPage = () => {
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [activeTab, setActiveTab] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -118,73 +114,42 @@ const ManageBooksPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Sidebar */}
-      <div className="fixed left-0 top-0 h-full w-64 bg-indigo-800 text-white p-4 shadow-lg">
-        <div className="flex items-center space-x-2 mb-8">
-          <FaBook className="text-2xl" />
-          <h1 className="text-xl font-bold">LibraryPro</h1>
-        </div>
-        <nav>
-          <ul className="space-y-2">
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition bg-indigo-700">
-              <FaBook />
-              <span>Manage Books</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaUser />
-              <span>Members</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaBookmark />
-              <span>Reports</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaCog />
-              <span>Settings</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaBell />
-              <span>Notifications</span>
-            </li>
-          </ul>
-        </nav>
-      </div>
 
       {/* Main Content */}
-      <div className="ml-64 p-8">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800">Manage Books</h2>
-          <button className="flex items-center space-x-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">
+      <div className="bg-white p-2 rounded-md shadow-lg max-w-7xl mx-auto mt-4">
+        <div className="flex justify-between items-center mb-2">
+          <h2 className="text-1xl font-bold text-gray-800">Manage Books</h2>
+          <button className="flex items-center space-x-2 bg-indigo-600 text-white px-2 py-2 rounded-md hover:bg-indigo-700 transition">
             <FaPlus />
             <span>Add New Book</span>
           </button>
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white p-4 rounded shadow text-center">
-            <h3 className="text-lg font-medium text-gray-600">Total Books</h3>
-            <p className="text-2xl font-bold text-indigo-700">1,000</p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+          <div className="bg-white p-2 rounded shadow text-center">
+            <h3 className="text-md font-medium text-gray-600">Total Books</h3>
+            <p className="text-1xl font-bold text-indigo-700">1,000</p>
           </div>
-          <div className="bg-white p-4 rounded shadow text-center">
-            <h3 className="text-lg font-medium text-gray-600">Available</h3>
-            <p className="text-2xl font-bold text-indigo-700">850</p>
+          <div className="bg-white p-2 rounded shadow text-center">
+            <h3 className="text-md font-medium text-gray-600">Available</h3>
+            <p className="text-1xl font-bold text-indigo-700">850</p>
           </div>
-          <div className="bg-white p-4 rounded shadow text-center">
-            <h3 className="text-lg font-medium text-gray-600">Checked Out</h3>
-            <p className="text-2xl font-bold text-indigo-700">120</p>
+          <div className="bg-white p-2 rounded shadow text-center">
+            <h3 className="text-md font-medium text-gray-600">Checked Out</h3>
+            <p className="text-1xl font-bold text-indigo-700">120</p>
           </div>
-          <div className="bg-white p-4 rounded shadow text-center">
-            <h3 className="text-lg font-medium text-gray-600">Reserved</h3>
-            <p className="text-2xl font-bold text-indigo-700">30</p>
+          <div className="bg-white p-2 rounded shadow text-center">
+            <h3 className="text-md font-medium text-gray-600">Reserved</h3>
+            <p className="text-1xl font-bold text-indigo-700">30</p>
           </div>
         </div>
 
         {/* Search and Filter */}
-        <div className="bg-white p-4 rounded-lg shadow mb-6">
-          <div className="flex items-center justify-between space-x-4 mt-4 pb-2">
+        <div className="bg-white p-1 rounded-lg shadow mb-2">
+          <div className="flex items-center justify-between space-x-4 mt-2 pb-1">
             {/* Filter Tabs */}
-            <div className="flex space-x-4 mt-4 overflow-x-auto pb-2">
+            <div className="flex space-x-4 mt-4 overflow-x-auto pb-1">
               {["All", "Available", "Reserved", "Damaged"].map((tab) => (
                 <button
                   key={tab}
@@ -227,11 +192,11 @@ const ManageBooksPage = () => {
             <table className="min-w-full text-sm text-left text-gray-500">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700">
                 <tr>
-                  <th className="text-xl font-semibold text-gray-700 px-6 py-3">ID</th>
-                  <th className="text-xl font-semibold text-gray-700 px-6 py-3">Title</th>
-                  <th className="text-xl font-semibold text-gray-700 px-6 py-3">Author</th>
-                  <th className="text-xl font-semibold text-gray-700 px-6 py-3">Status</th>
-                  <th className="text-xl font-semibold text-gray-700 px-6 py-3">Actions</th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">ID</th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Title</th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Author</th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Status</th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -286,9 +251,19 @@ const ManageBooksPage = () => {
             </table>
           </div>
         </div>
-        <div className="text-xl font-semibold text-gray-700 mt-4 flex justify-between items-center">
+        <div className="text-md font-semibold text-gray-700 mt-4 flex justify-between items-center">
           Total Books: {filteredBooks.length}
+          <select
+          className="ml-2 border px-2 py-1 rounded"
+          value={itemsPerPage}
+          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+        >
+          <option value={10}>Show 10</option>
+          <option value={15}>Show 15</option>
+          <option value={20}>Show 20</option>
+        </select>
         </div>
+        
       </div>
     </div>
   );
