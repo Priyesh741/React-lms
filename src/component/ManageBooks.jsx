@@ -1,13 +1,12 @@
 import { useState } from "react";
-import {
-  FaSearch,
-  FaPlus,
-} from "react-icons/fa";
+import { FaSearch, FaPlus } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+
 
 const ManageBooksPage = () => {
-  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [activeTab, setActiveTab] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+
 
   const books = [
     {
@@ -102,6 +101,22 @@ const ManageBooksPage = () => {
     },
   ];
 
+  const ITEMS_PER_PAGE = 5;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(booksData.length / ITEMS_PER_PAGE);
+
+  const handleNext = () => {
+    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
+  };
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const currentBooks = booksData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
   const filteredBooks = books.filter((book) => {
     const matchesSearch =
       book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -114,15 +129,16 @@ const ManageBooksPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       {/* Main Content */}
       <div className="bg-white p-2 rounded-md shadow-lg max-w-7xl mx-auto mt-4">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-1xl font-bold text-gray-800">Manage Books</h2>
-          <button className="flex items-center space-x-2 bg-indigo-600 text-white px-2 py-2 rounded-md hover:bg-indigo-700 transition">
-            <FaPlus />
-            <span>Add New Book</span>
-          </button>
+          <Link to="/add">
+            <button className="flex items-center space-x-2 bg-indigo-600 text-white px-2 py-2 rounded-md hover:bg-indigo-700 transition">
+              <FaPlus />
+              <span>Add New Book</span>
+            </button>
+          </Link>
         </div>
 
         {/* Stats Cards */}
@@ -192,11 +208,21 @@ const ManageBooksPage = () => {
             <table className="min-w-full text-sm text-left text-gray-500">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700">
                 <tr>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">ID</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Title</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Author</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Status</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Actions</th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">
+                    ID
+                  </th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">
+                    Title
+                  </th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">
+                    Author
+                  </th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">
+                    Status
+                  </th>
+                  <th className="text-md font-semibold text-gray-900 px-6 py-3">
+                    Actions
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -227,6 +253,9 @@ const ManageBooksPage = () => {
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">
                         <div className="flex space-x-3">
+                          <button className="px-4 py-2 rounded-full text-sm font-medium transition bg-green-100 text-green-700 hover:bg-blue-200">
+                            View
+                          </button>
                           <button className="px-4 py-2 rounded-full text-sm font-medium transition bg-blue-100 text-blue-700 hover:bg-blue-200">
                             Edit
                           </button>
@@ -253,17 +282,23 @@ const ManageBooksPage = () => {
         </div>
         <div className="text-md font-semibold text-gray-700 mt-4 flex justify-between items-center">
           Total Books: {filteredBooks.length}
-          <select
-          className="ml-2 border px-2 py-1 rounded"
-          value={itemsPerPage}
-          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+          <div className="flex justify-between">
+        <button
+          onClick={handlePrev}
+          disabled={currentPage === 1}
+          className="bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
         >
-          <option value={10}>Show 10</option>
-          <option value={15}>Show 15</option>
-          <option value={20}>Show 20</option>
-        </select>
+          Previous
+        </button>
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className="bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
         </div>
-        
       </div>
     </div>
   );

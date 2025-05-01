@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaBook, FaUser, FaCog, FaBell, FaBookmark, FaPlus } from 'react-icons/fa';
+import { FaBook, FaUser,FaBookmark} from 'react-icons/fa';
 
 const Sidebar = () => {
   return (
