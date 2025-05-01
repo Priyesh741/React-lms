@@ -118,37 +118,6 @@ const ManageBooksPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Sidebar */}
-      <div className="fixed left-0 top-0 h-full w-64 bg-indigo-800 text-white p-4 shadow-lg">
-        <div className="flex items-center space-x-2 mb-8">
-          <FaBook className="text-2xl" />
-          <h1 className="text-xl font-bold">LibraryPro</h1>
-        </div>
-        <nav>
-          <ul className="space-y-2">
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition bg-indigo-700">
-              <FaBook />
-              <span>Manage Books</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaUser />
-              <span>Members</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaBookmark />
-              <span>Reports</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaCog />
-              <span>Settings</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 rounded hover:bg-indigo-700 transition">
-              <FaBell />
-              <span>Notifications</span>
-            </li>
-          </ul>
-        </nav>
-      </div>
 
       {/* Main Content */}
       <div className="ml-64 p-8">
