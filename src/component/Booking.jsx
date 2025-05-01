@@ -1,7 +1,7 @@
 export default function BookForm() {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-7xl mx-auto mt-6 ml-75">
-      <h2 className="text-2xl font-semibold mb-4">Book Information</h2>
+    <div className="bg-white p-2 rounded-md shadow-lg max-w-7xl mx-auto mt-2">
+      <h2 className="text-2xl font-Normal mb-4">Book Information</h2>
 
       <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Book Title */}

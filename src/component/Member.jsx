@@ -34,7 +34,7 @@ const MembersPage = () => {
       <div className="flex justify-between items-center mb-4">
         <input
           type="text"
-          placeholder="Search books"
+          placeholder="Search Username"
           className="border px-4 py-2 rounded w-1/3"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -76,7 +76,7 @@ const MembersPage = () => {
       </table>
 
       <div className="flex justify-between items-center mt-4">
-        <div>Total Books : {filteredMembers.length}</div>
+        <div>Total User : {filteredMembers.length}</div>
         <div className="flex items-center space-x-2">
           <button className="px-3 py-1 border rounded">⟨⟨</button>
           <button className="px-3 py-1 border rounded bg-purple-600 text-white">1</button>
@@ -84,8 +84,8 @@ const MembersPage = () => {
           <button className="px-3 py-1 border rounded">⟩⟩</button>
           <select className="ml-2 border px-2 py-1 rounded">
             <option>Show 10</option>
+            <option>Show 15</option>
             <option>Show 20</option>
-            <option>Show 50</option>
           </select>
         </div>
       </div>
