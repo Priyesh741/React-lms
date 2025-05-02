@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BookForm = () => {
+  const navigate = useNavigate();
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
 
@@ -24,6 +26,11 @@ const BookForm = () => {
     setFormData(initialFormState);
   };
 
+  const handleSubmit = (e = null) => {
+    if (e) e.preventDefault();
+    navigate('/booking-detail', { state: formData });
+  };
+
   const handleAddBook = () => {
     const { title, author, genre, language, copies, status, date, file } =
       formData;
@@ -44,10 +51,12 @@ const BookForm = () => {
     }
 
     // Assume form submission logic here
-    console.log("Book added");
     setShowSuccessToast(true);
     setTimeout(() => setShowSuccessToast(false), 3000);
-    handleCancel();
+    handleSubmit();
+    setTimeout(() => {
+      handleCancel();
+    }, 100);
   };
 
   const handleChange = (e) => {
@@ -57,6 +66,7 @@ const BookForm = () => {
       [name]: type === "file" ? files[0] : value,
     }));
   };
+
 
   return (
     <div className="relative bg-white p-4 rounded-md shadow-lg max-w-7xl mx-auto mt-2">
@@ -74,7 +84,7 @@ const BookForm = () => {
         </div>
       )}
 
-      <h2 className="text-2xl font-semibold mb-4">Book Information</h2>
+      <h2 onSubmit={handleAddBook} className="text-2xl font-semibold mb-4">Book Information</h2>
 
       <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Book Title */}
@@ -224,7 +234,7 @@ const BookForm = () => {
         <button
           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
           onClick={handleAddBook}
-          type="button"
+          type="submit"
         >
           Add Book
         </button>

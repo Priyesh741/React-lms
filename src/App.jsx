@@ -5,12 +5,13 @@ import Member from "./component/Member"; // your Members component
 import Sidebar from "./component/Sidebar"; // Your sidebar layout
 import AddPage from "./component/AddPage";
 import AddMember from "./component/AddMember";
+import BookingDetail from "./component/BookingDetail";
 
 function App() {
   return (
     <Router>
       <div className="flex min-h-screen">
-        <Sidebar /> {/* Sidebar will always be shown */}
+        <Sidebar /> 
         <div className="flex-1 p-2">
           <Routes>
             <Route path="/manage-books" element={<ManageBooks />} />
@@ -19,6 +20,7 @@ function App() {
             <Route path="/sidebar" element={<Sidebar />} />
             <Route path="/add" element={<AddPage />} />
             <Route path="/addmember" element={<AddMember />} />
+            <Route path="/booking-detail" element={<BookingDetail />} />
           </Routes>
         </div>
       </div>
