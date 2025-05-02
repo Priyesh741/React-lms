@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const AddPage = () => {
   // Initial form state
+  const navigate = useNavigate();
   const initialFormState = {
     title: '',
     author: '',
@@ -12,7 +14,11 @@ const AddPage = () => {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [showErrorToast, setShowErrorToast] = useState(false);
 
-  // Cancel/reset handler
+  const handleNavigate = (e=null) => {
+    if (e) e.preventDefault();
+    navigate("/manage-books",{state:formData}); 
+  };
+
   const handleCancel = () => {
     setFormData(initialFormState);
   };
@@ -29,8 +35,11 @@ const AddPage = () => {
 
     // Assume form submission logic here
     setShowSuccessToast(true);
-    setTimeout(() => setShowSuccessToast(false), 3000);
     handleCancel();
+    setTimeout(() => {
+      setShowSuccessToast(false);
+      handleNavigate();
+    }, 1600);
   };
 
   // Handle input changes

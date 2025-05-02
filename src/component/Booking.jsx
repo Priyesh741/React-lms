@@ -52,11 +52,13 @@ const BookForm = () => {
 
     // Assume form submission logic here
     setShowSuccessToast(true);
-    setTimeout(() => setShowSuccessToast(false), 3000);
-    handleSubmit();
+    handleCancel();
     setTimeout(() => {
-      handleCancel();
-    }, 100);
+      setShowSuccessToast(false);
+      handleSubmit();
+    }, 1600);
+
+    
   };
 
   const handleChange = (e) => {

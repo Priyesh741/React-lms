@@ -1,7 +1,9 @@
 // src/pages/AddMember.jsx
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 const AddMember = () => {
+  const navigate = useNavigate();
    const initialFormState = {
       username:'',
       emailid: '',
@@ -16,6 +18,11 @@ const AddMember = () => {
     const handleCancel = () => {
       setFormData(initialFormState);
     };
+
+    const handleNavigate = (e=null) => {
+      if (e) e.preventDefault();
+      navigate("/members"); 
+    };
   
     // Handle form submission
     const handleAddMember = () => {
@@ -29,8 +36,12 @@ const AddMember = () => {
   
       // Assume form submission logic here
       setShowSuccessToast(true);
-      setTimeout(() => setShowSuccessToast(false), 3000);
       handleCancel();
+      setTimeout(() => {
+      setShowSuccessToast(false);
+      handleNavigate();
+    }, 1600);
+      
     };
   
     // Handle input changes

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+// Dummy members array (replace with real data)
 const members = [
   {
     id: "U001",
@@ -14,70 +16,103 @@ const members = [
     id: "U002",
     name: "Jane Smith",
     email: "jane.smith@example.com",
-    role: "Admin",
-    membership: "English",
-    lending: "To Kill a Mockingbird, Hamlet",
-    fine: "5.00",
+    role: "Premium User",
+    membership: "Hindi",
+    lending: "1984",
+    fine: "0.00",
   },
-  // Add more members...
 ];
 
 const MembersPage = () => {
-  const [search, setSearch] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeMembershipTab, setActiveMembershipTab] = useState("All");
+  const [fineFilter, setFineFilter] = useState("All");
 
-  const filteredMembers = members.filter((m) =>
-    m.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const navigate = useNavigate();
+
+  // Filtering logic using regular function
+  function matchesFilters(member) {
+    const nameEmailMatch =
+      member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      member.email.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const membershipMatch =
+      activeMembershipTab === "All" ||
+      member.membership.toLowerCase() === activeMembershipTab.toLowerCase();
+
+    const fineMatch =
+      fineFilter === "All" ||
+      (fineFilter === "No Fine" && parseFloat(member.fine) === 0) ||
+      (fineFilter === "Due Fine" && parseFloat(member.fine) > 0);
+
+    return nameEmailMatch && membershipMatch && fineMatch;
+  }
+
+  const filteredMembers = members.filter(matchesFilters);
+
+  const handleNavigate = (e = null) => {
+    if (e) e.preventDefault();
+    navigate("/addmember");
+  };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-7xl mx-auto mt-6">
-      <div className="flex justify-between items-center mb-4">
+    <div className="p-4">
+      <div className="flex gap-4 mb-4">
         <input
           type="text"
-          placeholder="Search books"
-          className="border px-4 py-2 rounded w-1/3"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by name or email"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="border p-2 rounded w-64"
         />
-        <div className="flex gap-2">
-          <button className="bg-purple-600 text-white px-4 py-2 rounded">+ Add Member</button>
-          <div className="relative">
-            <button className="bg-gray-200 px-4 py-2 rounded">Actions ▼</button>
-            {/* Dropdown menu could go here */}
-          </div>
-        </div>
+        <select
+          value={activeMembershipTab}
+          onChange={(e) => setActiveMembershipTab(e.target.value)}
+          className="border p-2 rounded"
+        >
+          <option value="All">All Memberships</option>
+          <option value="English">English</option>
+          <option value="Hindi">Hindi</option>
+        </select>
+        <select
+          value={fineFilter}
+          onChange={(e) => setFineFilter(e.target.value)}
+          className="border p-2 rounded"
+        >
+          <option value="All">All Fines</option>
+          <option value="No Fine">No Fine</option>
+          <option value="Due Fine">Due Fine</option>
+        </select>
+        <button
+          onClick={handleNavigate}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Add Member
+        </button>
       </div>
 
-      <table className="w-full border text-sm text-left">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="p-3">User Id</th>
-            <th className="p-3">User Name</th>
-            <th className="p-3">Email</th>
-            <th className="p-3">Role</th>
-            <th className="p-3">Membership Type</th>
-            <th className="p-3">Lending History</th>
-            <th className="p-3">Fine</th>
+      <table className="w-full border-collapse">
+        <thead>
+          <tr className="bg-gray-100 text-left">
+            <th className="p-2 border">Name</th>
+            <th className="p-2 border">Email</th>
+            <th className="p-2 border">Membership</th>
+            <th className="p-2 border">Lending</th>
+            <th className="p-2 border">Fine</th>
           </tr>
         </thead>
         <tbody>
           {filteredMembers.map((member) => (
-            <tr key={member.id} className="border-t">
-              <td className="p-3">{member.id}</td>
-              <td className="p-3 text-purple-700 hover:underline cursor-pointer">{member.name}</td>
-              <td className="p-3">{member.email}</td>
-              <td className="p-3">{member.role}</td>
-              <td className="p-3">{member.membership}</td>
-              <td className="p-3">{member.lending}</td>
-              <td className="p-3">{member.fine}</td>
+            <tr key={member.id} className="hover:bg-gray-50">
+              <td className="p-2 border">{member.name}</td>
+              <td className="p-2 border">{member.email}</td>
+              <td className="p-2 border">{member.membership}</td>
+              <td className="p-2 border">{member.lending}</td>
+              <td className="p-2 border">{member.fine}</td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      <div className="flex justify-between items-center mt-4">
-        <div>Total Books : {filteredMembers.length}</div>
-      </div>
     </div>
   );
 };
