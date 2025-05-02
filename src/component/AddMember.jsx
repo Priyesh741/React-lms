@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 const AddMember = () => {
    const initialFormState = {
-      title: '',
-      author: '',
+      username:'',
+      emailid: '',
     };
   
     // Component state
@@ -28,7 +28,6 @@ const AddMember = () => {
       }
   
       // Assume form submission logic here
-      console.log("Book added");
       setShowSuccessToast(true);
       setTimeout(() => setShowSuccessToast(false), 3000);
       handleCancel();
@@ -73,7 +72,7 @@ const AddMember = () => {
           name="username"
           placeholder="Full Name"
           className="w-full mb-3 px-3 py-2 border rounded"
-          value={formData.name}
+          value={formData.username}
           onChange={handleChange}
           required
         />
