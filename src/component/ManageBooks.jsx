@@ -122,11 +122,11 @@ const ManageBooksPage = () => {
             <table className="min-w-full text-sm text-left text-gray-500">
               <thead className="bg-gray-50 text-xs uppercase text-gray-700">
                 <tr>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">ID</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Title</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Author</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Status</th>
-                  <th className="text-md font-semibold text-gray-900 px-6 py-3">Actions</th>
+                  <th className="text-md font-bold text-gray-900 px-6 py-3">ID</th>
+                  <th className="text-md font-bold text-gray-900 px-6 py-3">Title</th>
+                  <th className="text-md font-bold text-gray-900 px-6 py-3">Author</th>
+                  <th className="text-md font-bold text-gray-900 px-6 py-3">Status</th>
+                  <th className="text-md font-bold text-gray-900 px-6 py-3">Actions</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
