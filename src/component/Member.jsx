@@ -249,11 +249,11 @@ const MembersPage = () => {
               <tr key={member.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 font-medium text-gray-700">{member.name}</td>
                 <td className="px-6 py-4 font-medium text-gray-700">{member.email}</td>
-                <td className="px-6 py-4 font-medium text-gray-700">{member.language}</td>
+                <td className="px-6 py-4 font-normal text-gray-500">{member.language}</td>
                 <td className="px-6 py-4 font-medium text-gray-700">{member.lending}</td>
-                <td className="px-6 py-4 font-medium text-gray-700">{member.issuedDate}</td>
-                <td className="px-6 py-4 font-medium text-gray-700">{member.submittedDate}</td>
-                <td className="px-6 py-4 font-medium text-gray-700">{member.fine}</td>
+                <td className="px-6 py-4 font-normal text-gray-500">{member.issuedDate}</td>
+                <td className="px-6 py-4 font-normal text-gray-500">{member.submittedDate}</td>
+                <td className="px-6 py-4 font-normal text-gray-500">{member.fine}</td>
               </tr>
             ))}
           </tbody>
